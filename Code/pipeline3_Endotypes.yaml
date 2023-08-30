@@ -1,0 +1,20 @@
+x_path: /ix/djishnu/Trirupa/Schisto_Proj/ERinputs/MFI50/unsupV2/c3_c2lab1_AbScAg.MFI50_30May23_V2_X.csv    # path to .csv file for data matrix
+y_path: /ix/djishnu/Trirupa/Schisto_Proj/ERinputs/MFI50/unsupV2/c3_c2lab1_AbScAg.MFI50_30May23_V2_Y.csv    # path to .csv file for response vector
+out_path: /ix/djishnu/Trirupa/Schisto_Proj/ER_run/SEAplus_Eggneg/V2_30May23/c3_c2lab1_30May23.f0.5ERpipe3_del0.1_lam1.output/    # path to directory for saving results
+k: 5                       # number of folds for cross-validation
+delta: 0.1                # chosen delta (or delta grid for fine search)
+lambda: 1 # lambda grid   ####hardcoding it while ERpipeline is being debugged!
+y_factor: TRUE            # is y categorical?
+y_levels: [0,1]              # if y is ordinal, provide the levels (Ex: ["Mild", "Moderate", "Severe"])
+rep_cv: 10                 # number of replicates for cross-validation for delta
+nreps: 50                  # number of replicates for cross-validation in step 4
+eval_type: "auc"             # evaluate with Spearman correlation?
+alpha_level: 0.05          # alpha level for confidence intervals
+thresh_fdr: 0.5            # false discovery rate thresholding p-value cutoff
+lasso: FALSE               # do lasso?
+pcr: FALSE                # do pcr?
+plsr: FALSE               # do plsr?
+std_cv: TRUE
+std_y: TRUE
+permute: TRUE
+benchmark: FALSE
