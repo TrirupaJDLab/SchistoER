@@ -7,6 +7,7 @@ NOTE: All input datasets provided are pre-filtered for features based on median 
 2. X_data- has processed .csv files with the feature the inputs for ER (EvsNE : Egg+ vs Egg- ; class2: SEA+Egg-)
 3. Y_data- Has the outcome labels for the corresponding X datasets, as inputs for the ER pipeline. (class2: SEA+Egg-)
 4. unsupervised_XYdata- has inputs with labels generated from unsupervised clustering (k-means)
+5. Leprosy_confounding- has .csv files with MFI values and Leprosy and Schisto status. Allpat.csv includes all patients, PatNoLep.csv includes patients without leprosy. aucRFpermute*.csv files contain the permuted AUCs obtained from LASSO (with Random forest) for all patients and with patients without leprosy. aucRF_*.csv files contain AUC values for actual labels for the aforementioned 2 categories. 
 
 ## Code 
 This folder contains all scripts and yaml files used to perform the analysis used for the analyses:
