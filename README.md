@@ -1,4 +1,4 @@
-# SchistoER
+# SchistoAbomics
 
 ## Input 
 NOTE: All input datasets provided are pre-filtered for features based on median MFI>50. 
