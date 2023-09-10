@@ -1,7 +1,5 @@
 ## This code plots the MFI values for the endotypes and SEA+Egg+ ###
 
-#rm(list = ls())
-#cat("\014")
 
 library(dplyr)
 library(pROC)
@@ -10,7 +8,7 @@ library(ggplot2)
 library(reshape2)
 library(ggpubr)
 
-xydf=read.csv("/ix/djishnu/Trirupa/Schisto_Proj/data/c3_c2lab0lab1_AbScAg.MFI50_30May23_XY_patid.V2.csv")
+xydf=read.csv("active_endoAendoB_XY.csv")
 
 ##create lists 
 Z1=c("IgG.Gst.SM25", "IgG1.Gst.SM25", "IgG2.SEA", "IgG3.MEG", "IgG3.CD63", "FcR1.Gst.SM25", "FcR2A.Gst.SM25", "FcRIIB.Gst.SM25", "FcRIIIA.Gst.SM25", "FcR3B.Gst.SM25", "SNA.SEA")
@@ -33,14 +31,12 @@ subset_XY$Y[subset_XY$Y == 0] <- "Endo 2B"
 
 signif_labels=list(cutpoints = c(0, 0.0001, 0.001, 0.01, 0.05, Inf), symbols = c("****", "***", "**", "*", "ns"))
 
-#subset_melt=melt(subset_XY)
 my_comparisons <- list( c("Endo 2A", "Endo 2B"), c("Endo 2B", "SEA+ Egg+"), c("Endo 2A", "SEA+ Egg+"))
 annot_colors=c("SEA+ Egg+"="#E15759","Endo 2A"="#3B9AB2", "Endo 2B"="#FFBF00")
 Xi=data.frame()
 for (i in ERfeats){
   Xi=subset_XY[,c("Y",i)]
   melt_Xi=melt(Xi)
-  #colnames(melt_Xi)[3] <- "log2 MFI)"
   ##plotting the melted df for each i (feature)
   melt_plot=ggplot2::ggplot(data=melt_Xi,aes(x=Y,y=value))+
     ggplot2::geom_boxplot(data=melt_Xi, width=0.40, aes(fill=as.factor(Y))) + 
@@ -57,7 +53,7 @@ for (i in ERfeats){
     stat_compare_means(comparisons = my_comparisons, symnum.args = signif_labels,
                        aes(label = paste0("p =", after_stat(p.format))),label.x.npc="middle",label.y.npc="top") 
    ##### saving plot
-   file_name=paste0("/ix/djishnu/Trirupa/Schisto_Proj/ER_run/SEAplus_Eggneg/Plots/unsup_class2_ER/version2_30May23/R_boxplots_3way/",i,"_boxplot_c2AB_c3_30May23.pdf")
+   file_name=paste0(i,"_boxplot_endoAendoB_active.pdf")
    ggsave(filename=file_name,plot=melt_plot,device="pdf",dpi=300,width=5, height=6)
 }
 

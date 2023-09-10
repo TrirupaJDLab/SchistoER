@@ -1,6 +1,4 @@
 ## this code is to do LASSO regression using ER selected features to show with Antigen-based models are better than SEA in Schisto prediction
-#rm(list = ls())
-#cat("\014")
 
 library(e1071)
 library(caret)
@@ -18,11 +16,10 @@ library(reshape2)
 library(ggpubr)
 
 ## loading datasets
-Xdf=read.csv("/ix/djishnu/Trirupa/Schisto_Proj/ERinputs/MFI50/unsupV2/class2_AbScAg.MFI50_30May23_V2_X.csv", row.names=1)
-Ydf=read.csv("/ix/djishnu/Trirupa/Schisto_Proj/ERinputs/MFI50/unsupV2/class2_AbScAg.MFI50_30May23_V2_Y.csv", row.names=1)
+Xdf=read.csv("endoA_endoB_X.csv", row.names=1)
+Ydf=read.csv("endoA_endoB_Y.csv", row.names=1)
 
-#ag_lis=c("SEA","CD63","Calumenin")
-## subsetting only the selected Calumenin features for c1 vs c2
+## subsetting only the selected Calumenin features for endoA vs endoB
 # Subset columns containing "Calumenin"
 feats_Xdf <- Xdf[, grepl("CD63", colnames(Xdf))]
 
@@ -130,10 +127,7 @@ for (replicateCV in 1:num_repCV){
     #find optimal lambda value that minimizes test MSE
     best_lambda <- cv_model$lambda.min
     best_lambda
-    tuned_lambda=best_lambda*0.8 ## 0.7 for EvsNE # 0.75 for endo2b vs c3 # 0.9 for endoA vs c3
-    #produce plot of test MSE by lambda value
-    #plot(cv_model)
-    
+    tuned_lambda=best_lambda*0.8 ## needs to be tuned!
     #find coefficients of best model
     best_model <- glmnet(x=xtrain, y=ytrain, alpha = 1, lambda = tuned_lambda)
     coef(best_model)
@@ -195,7 +189,7 @@ for (replicateCV in 1:num_repCV){
     #find optimal lambda value that minimizes test MSE
     best_lambda <- cv_model$lambda.min
     best_lambda
-    tuned_lambda <-best_lambda*0.8  ## 0.8 for EvsNE
+    tuned_lambda <-best_lambda*0.8  ## needs to be tuned!
     #produce plot of test MSE by lambda value
     #plot(cv_model)
     
@@ -260,10 +254,8 @@ for (replicateCV in 1:num_repCV){
     #find optimal lambda value that minimizes test MSE
     best_lambda <- cv_model$lambda.min
     best_lambda
-    tuned_lambda <-best_lambda*1
-    #produce plot of test MSE by lambda value
-    #plot(cv_model)
-    
+    tuned_lambda <-best_lambda*1 needs to be tuned!
+
     #find coefficients of best model
     best_model <- glmnet(x=xtrain, y=ytrain, alpha = 1, lambda = tuned_lambda)
     coef(best_model)
@@ -325,7 +317,7 @@ for (replicateCV in 1:num_repCV){
     #find optimal lambda value that minimizes test MSE
     best_lambda <- cv_model$lambda.min
     best_lambda
-    tuned_lambda <-best_lambda*1 ## 0.7 for c2vsc3
+    tuned_lambda <-best_lambda*1 ## needs to be tuned!
     #produce plot of test MSE by lambda value
     #plot(cv_model)
     
@@ -371,7 +363,7 @@ Ag_plot=ggplot2::ggplot(data=melted_Ag_aucdf,aes(x=variable,y=value))+ggtitle("E
                      label.x.npc="middle",label.y.npc="top") +facet_grid()
 Ag_plot
 
-file_name="/ix/djishnu/Trirupa/Schisto_Proj/ER_run/SEAplus_Eggneg/Plots/unsup_class2_ER/version2_30May23/SEA_SM25.Agmodel.LASSO_rep20_EndoA_B.pdf"
+file_name="SEA_SM25.Agmodel.LASSO_rep20_EndoA_B.pdf"
 ggsave(filename=file_name,plot=Ag_plot,device="pdf",dpi=300,width=4, height=4,limitsize = FALSE)
 
 

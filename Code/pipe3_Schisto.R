@@ -7,10 +7,8 @@ library(ROCR)
 
 registerDoParallel(detectCores())
 
-##running pipeline
-#yaml_path = "/ix/djishnu/Trirupa/Schisto_Proj/ER_run/Egg_NoEgg_revisedLabels/pipeline3_EggvsNoEgg.yaml"
 
 ###yaml path for check_runs
-yaml_path = "/ix/djishnu/Trirupa/Schisto_Proj/ER_run/Egg_NoEgg_revisedLabels/pipeline3_EggvsNoEgg.yaml"
+yaml_path = "pipeline3_EggvsNoEgg.yaml"
 pipe3_run <- pipelineER3(yaml_path)
 pipe3_run

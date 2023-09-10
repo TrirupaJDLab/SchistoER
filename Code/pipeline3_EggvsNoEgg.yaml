@@ -1,6 +1,6 @@
-x_path: /ix/djishnu/Trirupa/Schisto_Proj/ERinputs/MFI50/EvsNE_AbScAg_30May23_MFI50_X.csv    # path to .csv file for data matrix
-y_path: /ix/djishnu/Trirupa/Schisto_Proj/ERinputs/EvsNE_Ab_ScAg_30May23_Y.csv   # path to .csv file for response vector
-out_path: /ix/djishnu/Trirupa/Schisto_Proj/ER_run/Egg_NoEgg_revisedLabels/_30may23_f0.5ERpipe3_del0.05_lam1.output/   # path to directory for saving results
+x_path: EvsNE_X.csv    # path to .csv file for data matrix
+y_path: EvsNE_Y.csv   # path to .csv file for response vector
+out_path: /EvsNE.output/   # path to directory for saving results
 k: 5                       # number of folds for cross-validation
 delta: 0.05                # chosen delta (or delta grid for fine search)
 lambda: 1 # lambda grid   ####hardcoding it while ERpipeline is being debugged!

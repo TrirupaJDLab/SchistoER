@@ -1,6 +1,4 @@
 ### this code plots the discrimination of the outcome lables by each significant LF ###
-#rm(list = ls())
-#cat("\014")
 
 library(EssReg)
 library(doParallel)
@@ -14,37 +12,18 @@ library(ggpubr)
 library(reshape2)
 registerDoParallel(detectCores())
 
-x=read.csv("/ix/djishnu/Trirupa/Schisto_Proj/ERinputs/MFI50/EvsNE_AbScAg_30May23_MFI50_X.csv", row.names=1)
-y=read.csv("/ix/djishnu/Trirupa/Schisto_Proj/ERinputs/EvsNE_Ab_ScAg_30May23_Y.csv", row.names = 1)
+x=read.csv("EvsNE_X.csv", row.names=1)
+y=read.csv("EvsNE_Y.csv", row.names = 1)
 x_std <- scale(x, T, T)
 
 ##loading er result
-er_result=readRDS("final_delta_0.1_lambda_1.rds")
+er_result=readRDS("/EvsNE.output/final_delta_0.1_lambda_1.rds")
 ##getting zs
-z=read.csv("zmatrix_EvsNE.MFI50.d0.1_lam1.auc.csv",row.names=1)
-
-sig_idx <- c(10)
-sig_z <- as.data.frame(z[ ,10])
-print(colnames(sig_z))
-
-##renaming Ys
-y$Y[y$Y == 1] <- "EndoA"
-y$Y[y$Y == 0] <- "EndoB"
-
-## for significance calculation
-signif_labels=list(cutpoints = c(0, 0.0001, 0.001, 0.01, 0.05, Inf), symbols = c("****", "***", "**", "*", "ns"))
-
-df1 <- data.frame()
-df1=cbind(sig_z,y[,1])
-colnames(df1)[ncol(df1)] ="Status"
-colnames(df1)[1] ="Z10"
-
-
+z=read.csv("zmatrix_EvsNE.csv",row.names=1)
 
 
 annot_colors=c("Egg+"="#E15759","Egg-"="#4E79A7")
-#annot_colors=c("SEA+Egg+"="#E15759","SEA+Egg-"="#F28E2B")
-#annot_colors=c("SEA+Egg+"="#E15759","EndoB"="#FFBF00")
+
 ##renaming Ys
 y$Y[y$Y == 1] <- "Egg+"
 y$Y[y$Y == 0] <- "Egg-"
@@ -73,6 +52,6 @@ df1_zplot
 resplot=df1_zplot+ylim(min(df1$value),4)
 resplot=df1_zplot
 resplot
-file_name=paste0("/ix/djishnu/Trirupa/Schisto_Proj/ER_run/Egg_NoEgg_revisedLabels/Plots/version2_30May23/Z16_boxplot_EvsNE_30May23.pdf")
+file_name=paste0("Z16_boxplot_EvsNE.pdf")
 file_name
 ggsave(filename=file_name,plot=resplot,device="pdf",dpi=300,width=4, height=4,limitsize = FALSE)

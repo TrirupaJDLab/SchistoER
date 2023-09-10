@@ -27,12 +27,12 @@ You can also embed plots, for example:
 ```{r Loading_training_set}
 ##This is the training set subsetted to the features selected by ER pipeline3.
 
-x_train=read.csv("/ix/djishnu/Trirupa/Schisto_Proj/ERinputs/Validation/V_19jun23/X_train_AllERselected_featEvsNE_30May23.csv", row.names=1)
+x_train=read.csv("X_train.csv", row.names=1)
 
-y_train=read.csv("/ix/djishnu/Trirupa/Schisto_Proj/ERinputs/Validation/V_19jun23/Y_train_AllERselected_featEvsNE_30May23.csv", row.names=1)
+y_train=read.csv("Y_train.csv", row.names=1)
 
 ## re-run ERpipe3 on the subsetted training set to get er_res_train
-er_res_train=readRDS("/ix/djishnu/Trirupa/Schisto_Proj/ER_run/Validation/V19jun23_trainfeats_f0.5ERpipe3_del0.1_lam1.output/final_delta_0.1_lambda_1.rds")
+er_res_train=readRDS("./Crossprediction.output/final_delta_0.1_lambda_1.rds")
 
 x_train_std=scale(x_train,T,T)
 ```
@@ -47,7 +47,7 @@ train_data=cbind(y_train,x_train_std)
 
 ```{r Loading_Validation_set}
 ## subsetting the test/Validation set using the ER selected features ##
-XY_test=read.csv("/ix/djishnu/Trirupa/Schisto_Proj/ERinputs/Validation/V_19jun23/XY_ScAg.VC_EvsNE.data_imputed_19jun23.csv")
+XY_test=read.csv("XY_VC_imputed.csv")
 
 # Filter Rows by list of column Values
 Z4=c("IgG2.Gst.SM25", "IgG2.Calumenin", "IgG3.SEA", "IgG3.CD63", "IgG4.SEA", "IgG4.CD63", "IgA1.MEG", "FcREpsilonI.SEA", "FcR2A.Calumenin")
@@ -61,9 +61,6 @@ allZfeats=c(Z4,Z5,Z9,Z13,Z16)
 ERfeats=unique(allZfeats) 
 ### x_test is the validation cohort (VC)
 x_test=XY_test %>% select(ERfeats) ## subsetting VC for ER selected features
-X_test_noZ4=x_test[, !(names(x_test) %in% Z16)]
-x_test=X_test_noZ4
-
 y_test=as.matrix(XY_test$Y)
 colnames(y_test)=paste0("Y")
 x_test_std=scale(x_test,T,T)
@@ -98,7 +95,7 @@ roc_score_test=roc(y_test,ytest_pred)
 ```
 
 ```{r Plotting}
-pdf(file="/ix/djishnu/Trirupa/Schisto_Proj/ER_run/Validation/EvsNE_validationROC_test_spec0.1.pdf") 
+pdf(file="EvsNE_validationROC.pdf") 
 plot.roc(roc_score_train, main="ROC curve Egg+ vs Egg-",colorize = TRUE, col="blue",print.auc = TRUE,print.auc.x=0.5, print.auc.y=0.9) 
 plot.roc(roc_score_test,add = TRUE,colorize = TRUE, col="red",print.auc = TRUE,print.auc.x=0.7, print.auc.y=0.5)
 legend(x = "bottomright",

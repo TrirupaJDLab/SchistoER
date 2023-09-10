@@ -1,23 +1,20 @@
 ### This code creats plots to compare the AUCs from randomly sampled LFs (equal to the number of actual LFs selected by ER) at different spec parameters to select the appropriate spec)
 
-#rm(list = ls())
-#cat("\014")
-
 library(SLIDE)
 library(pROC)
 
 ################################################################################
-Z <- read.table("/ix/djishnu/Trirupa/Schisto_Proj/ER_run/Egg_NoEgg_revisedLabels/MFI50_filt/_30may23_f0.5ERpipe3_del0.1_lam1.output/zmatrix_EvsNE.MFI50.d0.1_lam1.auc.csv", sep = ",", header = T, row.names = 1)
-y <- read.table("/ix/djishnu/Trirupa/Schisto_Proj/ERinputs/EvsNE_Ab_ScAg_30May23_Y.csv", row.names = 1, sep = ",", header = T)
+Z <- read.table("zmatrix_EvsNE.csv", sep = ",", header = T, row.names = 1)
+y <- read.table("EvsNE_Y.csv", row.names = 1, sep = ",", header = T)
 colnames(y) <- "y"
 zz <- row.names(Z)
-y <- y[zz,,drop=F]
+y <- y[zz,drop=F]
 source("/ix/djishnu/Javad/Hierarchical_ER_v2/R/pairwise_interactions.R")
 
 
 # Real ##########################################################################
 
-# put your marginal and interaction variables here!
+# put your marginlas/significant LFs here!
 sigK <- c(4,5,9,13,16)
 sigIn=c()
 IntData <- pairwise_interactions(sigK,Z)
@@ -26,7 +23,7 @@ Data_real <- data.frame(y = y, Z[, sigK], Dataint)
 lmod  <- lm(y~.,data=Data_real)
 yhat <- predict(lmod,Data_real[,-1],type = 'response')
 aucreal <- auc(response=as.matrix(y), predictor=as.matrix(yhat))
-aucreal_2=0.9361
+
 
 # All random ####################################################################
 Fullreport <- NULL
@@ -81,6 +78,6 @@ P2 <- P2 + theme(panel.border = element_blank(),
 
 P2
 
-saveRDS(df, file                = "/ix/djishnu/Trirupa/Schisto_Proj/ER_run/Egg_NoEgg_revisedLabels/MFI50_filt/_30may23_f0.5ERpipe3_del0.1_lam1.output/ERplots/ggplotobject_randompar_data2.rds")
-ggsave(P2, filename              = "/ix/djishnu/Trirupa/Schisto_Proj/ER_run/Egg_NoEgg_revisedLabels/MFI50_filt/_30may23_f0.5ERpipe3_del0.1_lam1.output/ERplots/randomvsreal_specPlot.pdf")
+saveRDS(df, file                = "ggplotobject_randompar_data2.rds")
+ggsave(P2, filename              = "randomvsreal_specPlot.pdf")
 

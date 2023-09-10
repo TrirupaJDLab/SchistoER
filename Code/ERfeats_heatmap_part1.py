@@ -4,13 +4,13 @@
 import pandas as pd
 import numpy as np
 
-Xdf=pd.read_csv("/ix/djishnu/Trirupa/Schisto_Proj/ERinputs/MFI50/Xc2_c3_AbScAg_MFI50_30May23.csv", sep=",")
-Ydf=pd.read_csv("/ix/djishnu/Trirupa/Schisto_Proj/ERinputs/Yc2_c3_AbScAg_30May23.csv", sep=",")
+Xdf=pd.read_csv("class2_active_X.csv", sep=",")
+Ydf=pd.read_csv("class2_active_Y.csv", sep=",")
 Xdf=Xdf.drop(columns=["Unnamed: 0"])
 Ydf=Ydf.drop(columns=["Unnamed: 0"])
 XY_df=pd.concat([Xdf,Ydf],axis=1)
 
-## SEA+Egg- vs SEA+Egg+
+## SEA+Egg- (class2) vs SEA+Egg+ (active)
 Z1=["IgG1.SEA", "IgG1.Gst.SM25", "IgG3.SEA", "IgG3.Calumenin", "IgA.Gst.SM25", "IgA1.SEA", "IgA1.MEG", "IgA2.MEG", "IgA2.Calumenin", "FcR2A.Calumenin","FcR3B.Calumenin", "SNA.MEG", "SNA.CD63"]
 Z2=["IgG2.Gst.SM25", "IgG2.Calumenin", "IgG3.CD63", "IgG4.SEA", "IgG4.CD63", "FcREpsilonI.SEA", "FcR2A.Calumenin"]
 Z3=["IgG.Calumenin", "IgA.Calumenin", "IgA1.SEA", "IgA1.Gst.SM25", "IgA1.MEG", "IgA1.CD63", "IgA1.Calumenin", "IgA2.Calumenin"]
@@ -45,4 +45,4 @@ meandf_sorted = mean_df.sort_values(by='log2FC', ignore_index=True,na_position='
 feat_sorted= list(meandf_sorted['Feature'])
 
 XYsort_df =XY_df.reindex(columns=feat_sorted) 
-XYsort_df.to_csv("/ix/djishnu/Trirupa/Schisto_Proj/forHeatmap/data/c2_c3_featsorted_spec0.1_patid_X.csv", sep=",",index=None)
+XYsort_df.to_csv("class2_active_featsorted_patid_X.csv", sep=",",index=None)

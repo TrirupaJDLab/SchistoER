@@ -11,7 +11,7 @@ library(cvAUC)
 library(pROC)
 library(dplyr)
 
-dataset=read.csv("/ix/djishnu/Trirupa/Schisto_Proj/data/3way_AbScAg_30May23_MFI50.csv") ##has both X (outcome) and Y (labels)
+dataset=read.csv("Allpat.csv") ##has both X (outcome) and Y (labels)
 data=dataset[,-1]
 Y_data <- data[,1]
 colnames(data)[1] <- "Y" 
@@ -193,27 +193,21 @@ for (replicateCV in 1:num_repCV){
     }
   }
   # get auc score for each replication
-  #print("printing AUCs")
   aucRF_rep[replicateCV] <- auc(trueY, append.RF)
-  #print(aucRF[replicateCV])
   aucSVM_rep[replicateCV] <- auc(trueY, append.SVM)
-  #print(aucSVM[replicateCV])
+
   
   aucRF_permut_rep[replicateCV] <- auc(permutY, append.RF_permut)
-  #print(aucRF_permut[replicateCV])
   aucSVM_permut_rep[replicateCV] <- auc(permutY, append.SVM_permut)
 }
 # get auc score for each replication
 aucRF <- auc(trueY, append.RF)
-#print(aucRF[replicateCV])
 aucSVM<- auc(trueY, append.SVM)
-#print(aucSVM[replicateCV])
 
 aucRF_permut <- auc(permutY, append.RF_permut)
-#print(aucRF_permut[replicateCV])
 aucSVM_permut <- auc(permutY, append.SVM_permut)
 
-write.csv(aucRF_rep, "/ix/djishnu/Trirupa/Schisto_Proj/LASSO/AUCs/EvsNE_lepNolep/aucRF_allpat_AbScAg_MFI50_l0.5.csv")
-write.csv(aucSVM_rep, "/ix/djishnu/Trirupa/Schisto_Proj/LASSO/AUCs/EvsNE_lepNolep/aucSVM_allpat_AbScAg_MFI50_l0.5.csv")
-write.csv(aucRF_permut_rep, "/ix/djishnu/Trirupa/Schisto_Proj/LASSO/AUCs/EvsNE_lepNolep/aucRFpermute_allpat_AbScAg_MFI50_l0.5.csv")
-write.csv(aucSVM_permut_rep, "/ix/djishnu/Trirupa/Schisto_Proj/LASSO/AUCs/EvsNE_lepNolep/aucSVMpermute_allpat_AbScAg_MFI50_l0.5.csv")
+write.csv(aucRF_rep, "aucRF_allpat.csv")
+#write.csv(aucSVM_rep, "/ix/djishnu/Trirupa/Schisto_Proj/LASSO/AUCs/EvsNE_lepNolep/aucSVM_allpat_AbScAg_MFI50_l0.5.csv")
+write.csv(aucRF_permut_rep, "aucRFpermute_allpat.csv")
+#write.csv(aucSVM_permut_rep, "/ix/djishnu/Trirupa/Schisto_Proj/LASSO/AUCs/EvsNE_lepNolep/aucSVMpermute_allpat_AbScAg_MFI50_l0.5.csv")

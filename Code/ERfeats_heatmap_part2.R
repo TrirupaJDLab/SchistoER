@@ -1,37 +1,29 @@
 ### This code plots heatmaps 
 
-#rm(list = ls())
-#cat("\014")
-
-library(ggplot2) # ggplot() for plotting
+library(ggplot2) 
 library(dplyr)
-library(plyr)# data reformatting
-library(tidyr) # data reformatting
-library(stringr) # string manipulation
+library(plyr)
+library(tidyr) 
+library(stringr) 
 library(RColorBrewer)
 library(sjPlot)
 library(pheatmap)
 library(genefilter)
+
 ###creating features X patId matrix
-patID_Xdf=read.csv("/ix/djishnu/Trirupa/Schisto_Proj/forHeatmap/data/c2A_2B_featsorted_30May23_V2_patid_X.csv", row.names=1)
+patID_Xdf=read.csv("endoA_endoB_featsorted_patid_X.csv", row.names=1)
 patID_X=rev(patID_Xdf)
-#patID_X=read.csv("/ix/djishnu/Trirupa/Schisto_Proj/forHeatmap/data/c2A_2B_featsorted_30May23_V2_patid_X.csv", row.names=1)
-#colnames(patID_X) <- gsub('.', '-', colnames(patID_X))
-#all_feats=c(feat_Z1,feat_Z2,feat_Z3,feat_Z4,feat_Z5)
 all_feats=colnames(patID_X)
 
-#patID_X_feat <- patID_X[, which((names(patID_X) %in% all_feats)==TRUE)]
 
 X_feat_patID=as.data.frame(t(patID_X))
-#X_feat_patID=as.data.frame(t(patID_X_feat)) ##this is the tmpMat
 tpmMat=X_feat_patID
 ##creating patID X group labels matrix. This is colAnnot
 ## sort the features in the feature matrix based on heatmap_featMFIsort.py script and then use the input ##
-patID_grp=read.csv("/ix/djishnu/Trirupa/Schisto_Proj/forHeatmap/data/c2A_2B_featsorted_30May23_V2_patid_Y.csv", row.names=1)
+patID_grp=read.csv("endoA_endoB_featsorted_patid_Y.csv", row.names=1)
 feat_list=data.frame(target_id=all_feats,feat_name=all_feats)
-#gene_list=feat_list
-
 results <- list()
+
 # Z-transform
 tpmMat <- as.matrix(tpmMat)
 row_means <- rowMeans(tpmMat)
@@ -74,7 +66,7 @@ save.heatmap <- function(x, filename,width=6,height=2.5) {
 
 
 # heatmap
-savePath="/ix/djishnu/Trirupa/Schisto_Proj/forHeatmap/plots/c2A_c2B.ScAg.MFI50._spec0.1_heatmapSorted_v1.pdf"
+savePath="EndoA_EndoB_spec0.1_heatmap.pdf"
 annot_colors=list(Y=c("EndoA"="#3B9AB2","EndoB"="#FFBF00"))
 
 hMap <- pheatmap(as.matrix(subZMat2), color=colorRampPalette(rev(brewer.pal(n = 7, name = "PiYG")))(100), 

@@ -1,6 +1,6 @@
-x_path: /ix/djishnu/Trirupa/Schisto_Proj/ERinputs/MFI50/Xc2_c3_AbScAg_MFI50_30May23.csv   # path to .csv file for data matrix
-y_path: /ix/djishnu/Trirupa/Schisto_Proj/ERinputs/Yc2_c3_AbScAg_30May23.csv    # path to .csv file for response vector
-out_path: /ix/djishnu/Trirupa/Schisto_Proj/ER_run/class1vs2/revisedSEAlabels/fdr1.0/MFI50_filt/_30may23.Ab.ScAg.f0.5ERpipe3_del0.1_lam1.output/    # path to directory for saving results
+x_path: class2_active_X.csv  # path to .csv file for data matrix
+y_path: class2_active_Y.csv    # path to .csv file for response vector
+out_path: /class2_active.output/    # path to directory for saving results
 k: 5                       # number of folds for cross-validation
 delta: 0.1                # chosen delta (or delta grid for fine search)
 lambda: 1 # lambda grid   ####hardcoding it while ERpipeline is being debugged!
