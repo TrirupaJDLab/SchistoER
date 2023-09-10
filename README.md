@@ -49,7 +49,7 @@ This code performs LASSO regression using antigens highlighted by the significan
 This code does unsupervised clustering by computing a silhouette index to identify the optimal k , and then generates labels using k-means clustering. The input required is the .csv file containing class2 (SEA+Egg-) samples i.e., the feature set (X) and the outcome Y, (labels). 
 
 ### 10. ZLevel_boxplot.R : 
-This script plots a boxplot illustrating the distributions of the outcome labels by each significant latent factor. The following are inputs required to run the script:
+This script plots a boxplot illustrating the distributions of the outcome labels by each significant latent factor. The following are inputs required to run the script:<br>
 i) x: .csv file with the MFI for features corresponding to the comparison of interest. <br>
 ii) y: .csv file having the outcome (labels) for the comparisons (in binary; Egg+ denoted by 1, Egg- denoted by 0). <br>
 iii) z: .csv file containing the matrix of all latent factors obtained from the ER pipeline.
