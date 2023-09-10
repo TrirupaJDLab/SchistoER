@@ -35,7 +35,7 @@ This script computes AUCs of features picked up by the significant latent factor
 This script orders the features selected by the significant latent factors based on the mean of log2(fold change) between the 2 groups (Y) being compared. 
 
 ### 6. ER_heatmap_part2.R : 
-This script takes the output of ER_heatmap_part1.py and plots a heatmap. The inputs of this script are the following:
+This script takes the output of ER_heatmap_part1.py and plots a heatmap. The inputs of this script are the following:<br>
 i) endoA_endoB_featsorted_patid_X.csv: This file has patient ids and the corresponding feature MFIs. <br>
 ii) endoA_endoB_featsorted_patid_Y.csv: This file has only the patient ids and the corresponding outcome (labels).
 
@@ -55,7 +55,7 @@ ii) y: .csv file having the outcome (labels) for the comparisons (in binary; Egg
 iii) z: .csv file containing the matrix of all latent factors obtained from the ER pipeline.
 
 ### 11. corr_net.R : 
-This code makes correlation networks for features within a latent factor. The inputs include:
+This code makes correlation networks for features within a latent factor. The inputs include:<br>
 i) the dataframe of feature MFI values. <br> 
 ii) list of features selected by the significant latent factor. 
 
