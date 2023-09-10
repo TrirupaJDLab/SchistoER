@@ -18,7 +18,7 @@ iii) ERmodel_performancePlot.R : makes box plots comparing AUCs on Actual and Pe
 iv) LatentFactor_extraction.R : this code gets the signficant LFs and features within it from the output of ER pipeline. The inputs are X (feature MFIs) and Y (outcome/labels) of the comparison of interest; ER output (final_delta_0.1_lambda_1.rds).
 
 ### 2. ER_crossprediction.Rmd : 
-This is an R markdown file for ER crossprediction between the discovery (Brazilian) cohort and the validation (Kenyan) cohort. It takes the following inputs:
+This is an R markdown file for ER crossprediction between the discovery (Brazilian) cohort and the validation (Kenyan) cohort. It takes the following inputs:<br>
 i) X_train.csv : file containing MFI values of features selected by the significant latent factors in the discovery cohort.<br>
 ii) Y_train.csv : file with outcome labels (Y) in the discovery cohort.<br>
 iii) XY_VC_imputed.csv: file containing the MFI values of the features in the validation cohort within the significant latent factors (obtained from discovery cohort) and the Y labels.<br>
